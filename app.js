@@ -1,191 +1,55 @@
-fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-.then(response => response.json())
-.then(data => displayMeals(data[0]));
+const searchNames = () =>{
+    const searchText = document.getElementById('search-field').value;
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`
 
-const displayMeals = meals =>{
-    for (let i = 0; i < meals.length; i++) {
-    const meal = meals[i];
-    console.log(meal.strCategory)
-
-    }
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayNames(data.meals))
 }
 
-
-
-
-// function displayMeals(meals){
-//     // const mealNames = meals.map(meal => meal.strCategory);
-//     var mealNames = JSON.parse('{"meal.strCategor"}');
-//     console.log(mealNames);
-// }
-
-
-
-
-
-
-// function displayMeals(meals){
-//     const mealName = meals.map(meal => meal.strCategory);
-//     const ul 
-// }
-
-
-
-
-
-
-
-// const displayMeals = meals =>{
-//     for (let i = 0; i < meals.length; i++) {
-//     const meal = meals[i];
-//     console.log(meal)
-
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const displayMeals = data.meals;
-//     for (let i = 0; i < displayMeals.length; i++) {
-//     const element = displayMeals[i];
-//     console.log(element.strCategory);
-//     }
-
-
-
-// fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-// .then(response => response.json())
-// .then(data => {
-
-//     for (let i = 0; i < meals.length; i++) {
-//     const meal = meals[i];
-//     console.log(data.strCategory)
-//     }
-// }
-
-
-
-
-
-// fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-// .then(response => response.json())
-// .then(data => displayMeals(data.meals));
-
-// const displayMeals = meals =>{
-//     const mealsDiv = document.getElementById('meals');
-//     meals.forEach(meal => {
-//         const mealDiv = document.createElement('div')
-//         mealDiv.className = `country`;
-
-//         const mealInfo = `
-//         <h3 class="country-name">${country.strCategory}</h3>
-//         <p>${country.strCategoryDescription}</p>
-//         `;
-//         mealDiv.innerHTML = mealInfo;
-
-//         mealsDiv.appendChild(mealDiv);
-
-//     });
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-// .then(res => res.json())
-// .then(data => displayMeal(data));
-
-
-// const displayMeal = meals => {
-//     const mealsDiv = document.getElementById('meals')l;
-//     for (let i = 0; i < meals.length; i++) {
-//         const meal = meals[i];
-//         const mealDiv = document.createElement('div');
-        
-//         const mealInfo = `
-//         <h3>Bangladesh</h3>
-//         <p>Dhaka</p>
-//         `
-
-//         mealDiv.innerHTML = mealInfo;
-
-//         mealsDiv.appendChild(countryDiv);
-//     }
-// }
-
-
-
-
-
-// fetch('https://restcountries.eu/rest/v2/all')
-// .then(res => res.json())
-// .then(data => displayCountries(data));
-
-// const displayCountries = meals =>{
-//     const countriesDiv = document.getElementById('meals');
-//     for (let i = 0; i < meals.length; i++) {
-//         const country = meals[i];
-//         const countryDiv = document.createElement('div');
-        
-//         // const h3 = document.createElement('h3');
-//         // h3.innerText = country.name;
-//         // countryDiv.appendChild(h3);
-
-//         // const p = document.createElement('p');
-//         // p.innerText = country.capital;
-//         // countryDiv.appendChild(p);
-
-//         const countryInfo = `
-//         <h3>${country.strCategory}</h3>
-//         <p>${country.strCategoryDescription}</p>
-//         `
-//         countryDiv.innerHTML = countryInfo;
-
-//         countriesDiv.appendChild(countryDiv);
-      
-//     }
-    
-// }
-
-
-
-
-
-
-
-
-
-
-
+const displayNames = names =>{
+    const mealContainer = document.getElementById('meal-container');
+
+    names.forEach(name => {
+        const mealDiv = document.createElement('div');
+        mealDiv.className = 'single-result row align-items-center my-3 p-3';
+
+        mealDiv.innerHTML = `
+                <div class="col-md-9">
+                    <img onclick="displayMealDetail('${name.strMeal}')" id="image" src="${name.strMealThumb}">
+                    <h3 class="lyrics-name">${name.strMeal}</h3>
+                    <p class="author lead"> <span></span></p>
+                </div>
+                <div class="col-md-3 text-md-right text-center">
+                    <button class="btn btn-success"></button>
+                </div>
+        `;
+        mealContainer.appendChild(mealDiv);
+    });
+}
+
+const displayMealDetail = name => {
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => renderMealInfo(data.meals[0]));
+}
+
+const renderMealInfo = name => {
+    // console.log(name)
+    const mealDiv = document.getElementById('meal-detail');
+    mealDiv.innerHTML = `
+    <img id="show-image" src="${name.strMealThumb}">
+    <h1>${name.strMeal}</h1>
+    <p>${name.strIngredient1}</p>
+    <p>${name.strIngredient2}</p>
+    <p>${name.strIngredient3}</p>
+    <p>${name.strIngredient4}</p>
+    <p>${name.strIngredient5}</p>
+    <p>${name.strIngredient6}</p>
+    <p>${name.strIngredient7}</p>
+    `;
+}
 
 
 

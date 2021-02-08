@@ -1,0 +1,71 @@
+body{
+    background-color: wheat;
+    color: black;
+    background-image: url(images/bg-image.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top;
+    width: 100%;
+}
+
+.form-control{
+    background-color:rgba(255, 255, 255, 0.2);
+    padding: 22px;
+    border: none;
+    border-radius: 25px;
+}
+.btn{
+    border-radius: 1.5rem;
+    padding: 9px 20px;
+}
+
+.btn-privious{
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+.navbar-toggler {
+    border: none;
+}
+.search-box{
+    position: relative;
+}
+.search-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+.single-result{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+}
+#meal-container img{
+    width: 300px;
+    border-radius: 15px;
+}
+#meal-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    text-align: center;
+    padding-left: 00px;
+    margin: 20px;
+    width: 100%;
+    padding: 5%;
+    margin-left: 0%;
+}
+.single-resul{
+    
+}
+
+#meal-detail{
+text-align: center;
+}
+#show-image{
+    width: 50%;
+    border-radius: 5px;
+}
+
+
+
+
